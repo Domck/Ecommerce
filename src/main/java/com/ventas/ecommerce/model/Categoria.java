@@ -22,12 +22,15 @@ public class Categoria {
     public Categoria() {
     }
 
-    public Categoria(Integer id, String nombreCategoria) {
+    public Categoria(Integer id, String nombreCategoria, String ordenCategoria, Usuario usuario, List<Producto> productos) {
         this.id = id;
         this.nombreCategoria = nombreCategoria;
+        this.ordenCategoria = ordenCategoria;
+        this.usuario = usuario;
+        this.productos = productos;
     }
 
-        public Integer getId() {
+    public Integer getId() {
             return id;
         }
 
@@ -43,11 +46,38 @@ public class Categoria {
             this.nombreCategoria = nombreCategoria;
         }
 
-        @Override
-        public String toString() {
-            return "Categoria{" +
-                    "id=" + id +
-                    ", nombreCategoria='" + nombreCategoria + '\'' +
-                    '}';
-        }
+    public String getOrdenCategoria() {
+        return ordenCategoria;
     }
+
+    public void setOrdenCategoria(String ordenCategoria) {
+        this.ordenCategoria = ordenCategoria;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "id=" + id +
+                ", nombreCategoria='" + nombreCategoria + '\'' +
+                ", ordenCategoria='" + ordenCategoria + '\'' +
+                ", usuario=" + usuario +
+                ", productos=" + productos +
+                '}';
+    }
+}

@@ -28,7 +28,7 @@ public class DetalleOrden {
     public DetalleOrden() {
     }
 
-    public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total, Producto producto, Orden orden) {
+    public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total, Producto producto, Orden orden, Asesor asesor) {
         this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -36,9 +36,8 @@ public class DetalleOrden {
         this.total = total;
         this.producto = producto;
         this.orden = orden;
+        this.asesor = asesor;
     }
-
-
 
     public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
         super();

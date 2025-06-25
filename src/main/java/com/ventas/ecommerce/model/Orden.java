@@ -26,12 +26,14 @@ public class Orden {
     public Orden() {
     }
 
-    public Orden(int id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
+    public Orden(int id, String numero, Date fechaCreacion, Date fechaRecibida, double total, Usuario usuario, DetalleOrden detalle) {
         this.id = id;
         this.numero = numero;
         this.fechaCreacion = fechaCreacion;
         this.fechaRecibida = fechaRecibida;
         this.total = total;
+        this.usuario = usuario;
+        this.detalle = detalle;
     }
 
     public int getId() {

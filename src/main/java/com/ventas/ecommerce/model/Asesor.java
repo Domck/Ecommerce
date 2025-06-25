@@ -21,11 +21,12 @@ public class Asesor {
     public Asesor() {
     }
 
-    public Asesor(Integer id, String nombreAsesor, String dniAsesor, String telefonoAsesor) {
+    public Asesor(Integer id, String nombreAsesor, String dniAsesor, String telefonoAsesor, List<DetalleOrden> detalleOrdenes) {
         this.id = id;
         this.nombreAsesor = nombreAsesor;
         this.dniAsesor = dniAsesor;
         this.telefonoAsesor = telefonoAsesor;
+        this.detalleOrdenes = detalleOrdenes;
     }
 
     public Integer getId() {

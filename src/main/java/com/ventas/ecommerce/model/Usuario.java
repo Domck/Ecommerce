@@ -27,7 +27,7 @@ public class Usuario {
     public Usuario(){
     }
 
-    public Usuario(Integer id, String nombre, String username, String email, String direcccion, String telefono, String tipo, String password) {
+    public Usuario(Integer id, String nombre, String username, String email, String direcccion, String telefono, String tipo, String password, List<Categoria> categorias, List<Orden> ordenes) {
         this.id = id;
         this.nombre = nombre;
         this.username = username;
@@ -36,6 +36,8 @@ public class Usuario {
         this.telefono = telefono;
         this.tipo = tipo;
         this.password = password;
+        this.categorias = categorias;
+        this.ordenes = ordenes;
     }
 
     public Integer getId() {
