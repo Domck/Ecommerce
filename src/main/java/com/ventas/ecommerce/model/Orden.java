@@ -20,16 +20,8 @@ public class Orden {
     private Usuario usuario;
 
     @OneToOne(mappedBy = "orden")
-    private DetalleOrden detalleOrden;
+    private DetalleOrden detalle;
 
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 
     public Orden() {
     }
@@ -81,6 +73,21 @@ public class Orden {
     public void setTotal(double total) {
         this.total = total;
     }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public DetalleOrden getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(DetalleOrden detalle) {
+        this.detalle = detalle;
+    }
 
     @Override
     public String toString() {
@@ -90,6 +97,8 @@ public class Orden {
                 ", fechaCreacion=" + fechaCreacion +
                 ", fechaRecibida=" + fechaRecibida +
                 ", total=" + total +
+                ", usuario=" + usuario +
+                ", detalle=" + detalle +
                 '}';
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@table(name = "usuarios")
+@Table(name = "usuarios")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,17 +19,10 @@ public class Usuario {
     private String password;
 
     @OneToMany(mappedBy = "usuario")
-    private List<Producto> productos;
+    private List<Categoria> categorias;
 
     @OneToMany(mappedBy = "usuario")
     private List<Orden> ordenes;
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
 
     public Usuario(){
     }
@@ -47,6 +40,14 @@ public class Usuario {
 
     public Integer getId() {
         return id;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
     public void setId(Integer id) {
@@ -109,6 +110,15 @@ public class Usuario {
         this.password = password;
     }
 
+
+    public List<Orden> getOrdenes() {
+        return ordenes;
+    }
+
+    public void setOrdenes(List<Orden> ordenes) {
+        this.ordenes = ordenes;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -120,6 +130,8 @@ public class Usuario {
                 ", telefono='" + telefono + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", password='" + password + '\'' +
+                ", categorias=" + categorias +
+                ", ordenes=" + ordenes +
                 '}';
     }
 }

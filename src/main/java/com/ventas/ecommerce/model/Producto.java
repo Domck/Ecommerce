@@ -15,25 +15,29 @@ public class Producto {
     private int cantidad;
 
     @ManyToOne
-    private Usuario usuario;
+    //private Usuario usuario;
+    private Categoria categoria;
 
-    public Producto(String id, String nombre, String descripcion, String imagen, double precio, int cantidad, Usuario usuario) {
+    public Producto(String id, String nombre, String descripcion, String imagen, double precio, int cantidad, Categoria categoria) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.usuario = usuario;
+        this.categoria = categoria;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+
+
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
+
 
     public Producto() {
     }
@@ -95,6 +99,7 @@ public class Producto {
                 ", imagen='" + imagen + '\'' +
                 ", precio=" + precio +
                 ", cantidad=" + cantidad +
+                ", categoria=" + categoria +
                 '}';
     }
 }

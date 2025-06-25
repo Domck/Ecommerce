@@ -1,10 +1,22 @@
 package com.ventas.ecommerce.model;
 
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table (name = "asesores")
 public class Asesor {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombreAsesor;
     private String dniAsesor;
     private String telefonoAsesor;
+
+    @OneToMany (mappedBy = "asesor")
+    private List<DetalleOrden> detalleOrdenes;
+
 
     public Asesor() {
     }
@@ -48,6 +60,14 @@ public class Asesor {
         this.telefonoAsesor = telefonoAsesor;
     }
 
+    public List<DetalleOrden> getDetalleOrdenes() {
+        return detalleOrdenes;
+    }
+
+    public void setDetalleOrdenes(List<DetalleOrden> detalleOrdenes) {
+        this.detalleOrdenes = detalleOrdenes;
+    }
+
     @Override
     public String toString() {
         return "Asesor{" +
@@ -55,6 +75,7 @@ public class Asesor {
                 ", nombreAsesor='" + nombreAsesor + '\'' +
                 ", dniAsesor='" + dniAsesor + '\'' +
                 ", telefonoAsesor='" + telefonoAsesor + '\'' +
+                ", detalleOrdenes=" + detalleOrdenes +
                 '}';
     }
 }

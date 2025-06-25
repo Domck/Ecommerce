@@ -2,6 +2,8 @@ package com.ventas.ecommerce.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table (name = "detalles")
 public class DetalleOrden {
@@ -13,21 +15,30 @@ public class DetalleOrden {
     private double precio;
     private double total;
 
-    @OneToOne
+    @ManyToOne
     private Producto producto;
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
 
     @OneToOne
     private Orden orden;
+
+    @ManyToOne
+    private Asesor asesor;
+
+
     public DetalleOrden() {
     }
+
+    public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total, Producto producto, Orden orden) {
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.total = total;
+        this.producto = producto;
+        this.orden = orden;
+    }
+
+
 
     public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
         super();
@@ -77,6 +88,29 @@ public class DetalleOrden {
     public void setTotal(double total) {
         this.total = total;
     }
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public Orden getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Orden orden) {
+        this.orden = orden;
+    }
+
+    public Asesor getAsesor() {
+        return asesor;
+    }
+
+    public void setAsesor(Asesor asesor) {
+        this.asesor = asesor;
+    }
 
     @Override
     public String toString() {
@@ -86,6 +120,9 @@ public class DetalleOrden {
                 ", cantidad=" + cantidad +
                 ", precio=" + precio +
                 ", total=" + total +
+                ", producto=" + producto +
+                ", orden=" + orden +
+                ", asesor=" + asesor +
                 '}';
     }
 }
