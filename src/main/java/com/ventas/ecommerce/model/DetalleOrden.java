@@ -28,19 +28,8 @@ public class DetalleOrden {
     public DetalleOrden() {
     }
 
-    public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total, Producto producto, Orden orden, Asesor asesor) {
-        this.id = id;
-        this.nombre = nombre;
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.total = total;
-        this.producto = producto;
-        this.orden = orden;
-        this.asesor = asesor;
-    }
 
     public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
-        super();
         this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -87,6 +76,7 @@ public class DetalleOrden {
     public void setTotal(double total) {
         this.total = total;
     }
+
     public Producto getProducto() {
         return producto;
     }
@@ -111,6 +101,7 @@ public class DetalleOrden {
         this.asesor = asesor;
     }
 
+
     @Override
     public String toString() {
         return "DetalleOrden{" +
@@ -119,9 +110,6 @@ public class DetalleOrden {
                 ", cantidad=" + cantidad +
                 ", precio=" + precio +
                 ", total=" + total +
-                ", producto=" + producto +
-                ", orden=" + orden +
-                ", asesor=" + asesor +
                 '}';
     }
 }

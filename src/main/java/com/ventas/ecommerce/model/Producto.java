@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
     private String nombre;
     private String descripcion;
     private String imagen;
@@ -15,36 +15,28 @@ public class Producto {
     private int cantidad;
 
     @ManyToOne
-    //private Usuario usuario;
     private Categoria categoria;
 
-    public Producto(String id, String nombre, String descripcion, String imagen, double precio, int cantidad, Categoria categoria) {
+    @ManyToOne
+    private Usuario usuario;
+
+    public Producto() {
+    }
+
+    public Producto(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.categoria = categoria;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-
-    public Producto() {
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -88,16 +80,31 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", imagen='" + imagen + '\'' +
                 ", precio=" + precio +
                 ", cantidad=" + cantidad +
-                ", categoria=" + categoria +
                 '}';
     }
 }

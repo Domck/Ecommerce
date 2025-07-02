@@ -22,29 +22,29 @@ public class Categoria {
     public Categoria() {
     }
 
-    public Categoria(Integer id, String nombreCategoria, String ordenCategoria, Usuario usuario, List<Producto> productos) {
+
+    public Categoria(Integer id, String nombreCategoria, String ordenCategoria) {
         this.id = id;
         this.nombreCategoria = nombreCategoria;
         this.ordenCategoria = ordenCategoria;
-        this.usuario = usuario;
-        this.productos = productos;
     }
 
+
     public Integer getId() {
-            return id;
-        }
+        return id;
+    }
 
-        public void setId(Integer id) {
-            this.id = id;
-        }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-        public String getNombreCategoria() {
-            return nombreCategoria;
-        }
+    public String getNombreCategoria() {
+        return nombreCategoria;
+    }
 
-        public void setNombreCategoria(String nombreCategoria) {
-            this.nombreCategoria = nombreCategoria;
-        }
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
+    }
 
     public String getOrdenCategoria() {
         return ordenCategoria;
@@ -76,8 +76,6 @@ public class Categoria {
                 "id=" + id +
                 ", nombreCategoria='" + nombreCategoria + '\'' +
                 ", ordenCategoria='" + ordenCategoria + '\'' +
-                ", usuario=" + usuario +
-                ", productos=" + productos +
                 '}';
     }
 }

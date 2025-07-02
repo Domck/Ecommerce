@@ -9,7 +9,7 @@ import java.util.Date;
 public class Orden {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String numero;
     private Date fechaCreacion;
     private Date fechaRecibida;
@@ -26,14 +26,13 @@ public class Orden {
     public Orden() {
     }
 
-    public Orden(int id, String numero, Date fechaCreacion, Date fechaRecibida, double total, Usuario usuario, DetalleOrden detalle) {
+
+    public Orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
         this.id = id;
         this.numero = numero;
         this.fechaCreacion = fechaCreacion;
         this.fechaRecibida = fechaRecibida;
         this.total = total;
-        this.usuario = usuario;
-        this.detalle = detalle;
     }
 
     public int getId() {
@@ -91,6 +90,7 @@ public class Orden {
         this.detalle = detalle;
     }
 
+
     @Override
     public String toString() {
         return "Orden{" +
@@ -99,8 +99,6 @@ public class Orden {
                 ", fechaCreacion=" + fechaCreacion +
                 ", fechaRecibida=" + fechaRecibida +
                 ", total=" + total +
-                ", usuario=" + usuario +
-                ", detalle=" + detalle +
                 '}';
     }
 }

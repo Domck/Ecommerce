@@ -21,12 +21,12 @@ public class Asesor {
     public Asesor() {
     }
 
-    public Asesor(Integer id, String nombreAsesor, String dniAsesor, String telefonoAsesor, List<DetalleOrden> detalleOrdenes) {
+
+    public Asesor(Integer id, String nombreAsesor, String dniAsesor, String telefonoAsesor) {
         this.id = id;
         this.nombreAsesor = nombreAsesor;
         this.dniAsesor = dniAsesor;
         this.telefonoAsesor = telefonoAsesor;
-        this.detalleOrdenes = detalleOrdenes;
     }
 
     public Integer getId() {
@@ -69,6 +69,7 @@ public class Asesor {
         this.detalleOrdenes = detalleOrdenes;
     }
 
+
     @Override
     public String toString() {
         return "Asesor{" +
@@ -76,7 +77,6 @@ public class Asesor {
                 ", nombreAsesor='" + nombreAsesor + '\'' +
                 ", dniAsesor='" + dniAsesor + '\'' +
                 ", telefonoAsesor='" + telefonoAsesor + '\'' +
-                ", detalleOrdenes=" + detalleOrdenes +
                 '}';
     }
 }
