@@ -1,9 +1,12 @@
 package com.ventas.ecommerce.controller;
 
 import com.ventas.ecommerce.model.Producto;
+import com.ventas.ecommerce.model.Usuario;
+import com.ventas.ecommerce.service.ProductoService;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductoController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(ProductoController.class);
+
+    @Autowired
+    private ProductoService productoService;
 
     @GetMapping("")
     public String show (){
@@ -28,6 +34,8 @@ public class ProductoController {
     @PostMapping("/save")
     public String save(Producto producto){
         LOGGER.info("Este es el objeto producto {}", producto);
+        Usuario u =new Usuario(1,"","","","","","","");
+        productoService.save(producto);
         return "redirect:/productos";
     }
 }
