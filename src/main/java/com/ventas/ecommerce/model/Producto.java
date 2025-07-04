@@ -30,6 +30,7 @@ public class Producto {
         this.imagen = imagen;
         this.precio = precio;
         this.cantidad = cantidad;
+        this.usuario = usuario;
     }
 
     public Integer getId() {
