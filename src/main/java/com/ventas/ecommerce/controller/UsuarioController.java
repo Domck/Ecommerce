@@ -46,12 +46,16 @@ public class UsuarioController {
     @PostMapping("/acceder")
     public String acceder(Usuario usuario, HttpSession session) {
         logger.info("Usuario acceder: {}", usuario);
+
+        // Normalizar el correo electrónico
+       // String email = usuario.getEmail().trim().toLowerCase();
+        //Optional<Usuario> user = usuarioService.findByEmail(email);
         Optional<Usuario> user=usuarioService.findByEmail(usuario.getEmail());
-        //logger.info("Usuario acceder: {}", user.get());
+
         if (user.isPresent()) {
             session.setAttribute("idusuario", user.get().getId());
             if (user.get().getTipo().equals("ADMIN")) {
-                return "redirect:/admin";
+                return "redirect:/administrador";
             }else {
                 return "redirect:/";
             }

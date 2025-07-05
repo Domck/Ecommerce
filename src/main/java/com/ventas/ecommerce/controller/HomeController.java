@@ -142,7 +142,7 @@ public class HomeController {
     @GetMapping("/order")
     public String order(Model model) {
 
-        Usuario usuario = usuarioService.findbyId(1).get();
+        Usuario usuario = usuarioService.findById(1).get();
         model.addAttribute("usuario", usuario);
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
@@ -157,7 +157,7 @@ public class HomeController {
         orden.setNumero(ordenService.generarNumeroOrden());
 
         // Usuario
-        Usuario usuario=usuarioService.findbyId(1).get();
+        Usuario usuario=usuarioService.findById(1).get();
 
         orden.setUsuario(usuario);
         ordenService.save(orden);
