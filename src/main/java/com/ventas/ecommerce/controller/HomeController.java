@@ -4,6 +4,8 @@ import com.ventas.ecommerce.model.DetalleOrden;
 import com.ventas.ecommerce.model.Orden;
 import com.ventas.ecommerce.model.Producto;
 import com.ventas.ecommerce.model.Usuario;
+import com.ventas.ecommerce.service.IDetalleOrdenService;
+import com.ventas.ecommerce.service.IOrdenService;
 import com.ventas.ecommerce.service.IUsuarioService;
 import com.ventas.ecommerce.service.ProductoService;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,13 +25,20 @@ import java.util.Optional;
 public class HomeController {
     private final Logger log = LoggerFactory.getLogger(HomeController.class);
 
-    @Autowired
-    private ProductoService productoService;
+            @Autowired
+            private ProductoService productoService;
 
-    @Autowired
-    private IUsuarioService usuarioService;
-    // para almacenar los detalles de la orden
-    List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
+            @Autowired
+            private IUsuarioService usuarioService;
+            // para almacenar los detalles de la orden
+            List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
+
+            @Autowired
+            private IOrdenService ordenService;
+
+            @Autowired
+            private IDetalleOrdenService detalleOrdenService;
+
 
     // Datos de la orden
     Orden orden = new Orden();
@@ -136,5 +146,31 @@ public class HomeController {
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
         return   "usuario/resumenorden";
+    }
+
+    // Guardar la orden y sus detalles
+    @GetMapping("/saveOrder")
+    public String saveOrder() {
+        Date fechaCreacion = new Date();
+        orden.setFechaCreacion(fechaCreacion);
+        orden.setNumero(ordenService.generarNumeroOrden());
+
+        // Usuario
+        Usuario usuario=usuarioService.findbyId(1).get();
+
+        orden.setUsuario(usuario);
+        ordenService.save(orden);
+
+        // Guardar detalles de la orden
+        for (DetalleOrden dt : detalles) {
+            dt.setOrden(orden);
+            detalleOrdenService.save(dt);
+        }
+
+        // Limpiar el carrito
+        orden = new Orden(); // Reiniciar la orden para futuras compras
+        detalles.clear();
+        log.info("Orden guardada exitosamente con número: {}", orden.getNumero());
+        return "redirect:/";
     }
 }
