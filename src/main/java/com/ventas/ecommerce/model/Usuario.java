@@ -13,7 +13,7 @@ public class Usuario {
     private String nombre;
     private String username;
     private String email;
-    private String direcccion;
+    private String direccion;
     private String telefono;
     private String tipo;
     private String password;
@@ -30,12 +30,12 @@ public class Usuario {
     public Usuario(){
     }
 
-    public Usuario(Integer id, String nombre, String username, String email, String direcccion, String telefono, String tipo, String password) {
+    public Usuario(Integer id, String nombre, String username, String email, String direccion, String telefono, String tipo, String password) {
         this.id = id;
         this.nombre = nombre;
         this.username = username;
         this.email = email;
-        this.direcccion = direcccion;
+        this.direccion = direccion;
         this.telefono = telefono;
         this.tipo = tipo;
         this.password = password;
@@ -57,6 +57,14 @@ public class Usuario {
         this.nombre = nombre;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -73,13 +81,7 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getDirecccion() {
-        return direcccion;
-    }
 
-    public void setDirecccion(String direcccion) {
-        this.direcccion = direcccion;
-    }
 
     public String getTelefono() {
         return telefono;
@@ -136,7 +138,7 @@ public class Usuario {
                 ", nombre='" + nombre + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", direcccion='" + direcccion + '\'' +
+                ", direccion='" + direccion + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", password='" + password + '\'' +
