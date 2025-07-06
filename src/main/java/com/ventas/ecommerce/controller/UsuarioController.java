@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,8 @@ public class UsuarioController {
     @Autowired
     private IOrdenService ordenService;
 
+    BCryptPasswordEncoder passEncode = new BCryptPasswordEncoder();
+
     @GetMapping("/registro")
     public String create() {
         return "usuario/registro";
@@ -40,6 +43,7 @@ public class UsuarioController {
     public String save(Usuario usuario) {
         logger.info("Usuario registro: {}", usuario);
         usuario.setTipo("USER");
+        usuario.setPassword(passEncode.encode(usuario.getPassword()));
         usuarioService.save(usuario);
         return "redirect:/";
     }
@@ -50,11 +54,11 @@ public class UsuarioController {
         return "usuario/login";
     }
 
-    @PostMapping("/acceder")
+    @GetMapping("/acceder")
     public String acceder(Usuario usuario, HttpSession session) {
         logger.info("Usuario acceder: {}", usuario);
 
-        Optional<Usuario> user=usuarioService.findByEmail(usuario.getEmail());
+        Optional<Usuario> user=usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString()));
 
         if (user.isPresent()) {
             session.setAttribute("idusuario", user.get().getId());
@@ -64,7 +68,7 @@ public class UsuarioController {
                 return "redirect:/";
             }
         }else {
-            logger.info("Usuario no existe: null");
+            logger.info("Usuario no existe");
         }
         return "redirect:/";
     }
