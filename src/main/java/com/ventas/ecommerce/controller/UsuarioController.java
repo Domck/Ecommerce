@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -75,5 +76,24 @@ public class UsuarioController {
 
         model.addAttribute("ordenes",ordenes);
         return "usuario/compras";
+    }
+
+    @GetMapping("/detalle/{id}")
+    public String detalleCompra(@PathVariable Integer id, Model model, HttpSession session) {
+        logger.info("Id de la orden: {}", id);
+        Optional<Orden> orden = ordenService.findById(id);
+
+        model.addAttribute("detalles", orden.get().getDetalle());
+        //session
+        model.addAttribute("sesion",session.getAttribute("idusuario"));
+        return "usuario/detallecompra";
+    }
+
+    @GetMapping("/cerrar")
+    public String cerrar(HttpSession session) {
+        Object id = session.getAttribute("idusuario");
+        logger.info("Cerrando sesión para usuario con ID: {}", id);
+        session.removeAttribute("idusuario");
+        return  "redirect:/";
     }
 }

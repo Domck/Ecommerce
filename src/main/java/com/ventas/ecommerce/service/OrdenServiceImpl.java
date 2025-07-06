@@ -25,6 +25,12 @@ public class OrdenServiceImpl implements IOrdenService {
     public List<Orden> findAll() {
         return ordenRepository.findAll();
     }
+
+    @Override
+    public Optional<Orden> findById(Integer id) {
+        return ordenRepository.findById(id);
+    }
+
     // 0000010
     public String generarNumeroOrden() {
         int numero=0;
