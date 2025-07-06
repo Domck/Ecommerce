@@ -22,7 +22,6 @@
 </head>
 
 <body>
-
 <!-- Navigation -->
 <div th:fragment="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -35,7 +34,6 @@
                        autocomplete="off">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
-
 
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive"
@@ -50,24 +48,19 @@
             </div>
         </div>
     </nav>
-
 </div>
-
 
 <!-- Navigation -->
 <div th:fragment="header-user">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" th:href="@{/}">Spring eCommerce</a>
-
             <form class="form-inline my-2 my-lg-0" method="post" th:action="@{/search}">
                 <input class="form-control mr-sm-2" type="search"
                        placeholder="Buscar" aria-label="Search" name="nombre"
                        autocomplete="off">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
-
-
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -79,20 +72,17 @@
                             class="nav-link dropdown-toggle" href="#"
                             id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false"> USER </a>
-
                         <div class="dropdown-menu"
                              aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" th:href="@{/usuario/compras}">Compras</a>
-                            <a class="dropdown-item" th:href="@{/getCart}">Carrito</a>
+                            <a class="dropdown-item" th:href="@{/getCart}" method="post">Carrito</a>
                             <a class="dropdown-item" th:href="@{/usuario/cerrar}">Salir</a>
                         </div></li>
                 </ul>
             </div>
         </div>
     </nav>
-
 </div>
-
 
 <!-- Footer -->
 <div th:fragment="footer">
@@ -103,13 +93,10 @@
         </div>
         <!-- /.container -->
     </footer>
-
 </div>
 
 <!-- Bootstrap core JavaScript -->
 <script th:src="@{vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-
 </body>
-
 </html>

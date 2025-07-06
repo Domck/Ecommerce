@@ -1,6 +1,8 @@
 package com.ventas.ecommerce.controller;
 
+import com.ventas.ecommerce.model.Orden;
 import com.ventas.ecommerce.model.Usuario;
+import com.ventas.ecommerce.service.IOrdenService;
 import com.ventas.ecommerce.service.IUsuarioService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,6 +26,9 @@ public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
+
+    @Autowired
+    private IOrdenService ordenService;
 
     @GetMapping("/registro")
     public String create() {
@@ -47,9 +53,6 @@ public class UsuarioController {
     public String acceder(Usuario usuario, HttpSession session) {
         logger.info("Usuario acceder: {}", usuario);
 
-        // Normalizar el correo electrónico
-       // String email = usuario.getEmail().trim().toLowerCase();
-        //Optional<Usuario> user = usuarioService.findByEmail(email);
         Optional<Usuario> user=usuarioService.findByEmail(usuario.getEmail());
 
         if (user.isPresent()) {
@@ -63,5 +66,14 @@ public class UsuarioController {
             logger.info("Usuario no existe: null");
         }
         return "redirect:/";
+    }
+    @GetMapping("/compras")
+    public String obtenerCompras(Model model,HttpSession session) {
+        model.addAttribute("sesion", session.getAttribute("idusuario"));
+        Usuario usuario = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
+        List<Orden> ordenes=ordenService.findByUsuario(usuario);
+
+        model.addAttribute("ordenes",ordenes);
+        return "usuario/compras";
     }
 }

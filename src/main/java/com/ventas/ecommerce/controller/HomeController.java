@@ -8,6 +8,7 @@ import com.ventas.ecommerce.service.IDetalleOrdenService;
 import com.ventas.ecommerce.service.IOrdenService;
 import com.ventas.ecommerce.service.IUsuarioService;
 import com.ventas.ecommerce.service.ProductoService;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,38 +46,39 @@ public class HomeController {
     Orden orden = new Orden();
 
     @GetMapping("")
-    public String home( Model model ) {
+    public String home( Model model, HttpSession session ) {
+
+        log.info("Sesion de usuario: {}", session.getAttribute("idusuario"));
         model.addAttribute("productos", productoService.findAll());
+
+        // SESSION
+        model.addAttribute("sesion", session.getAttribute("idusuario"));
         return "usuario/home";
     }
 
     @GetMapping("productohome/{id}")
     public String productoHome(@PathVariable Integer id, Model model) {
         log.info("Id producto enviado como parametro {}", id);
+        Producto producto = new Producto();
         Optional<Producto> productoOptional = productoService.get(id);
-        if (productoOptional.isPresent()) {
+        producto = productoOptional.get();
+        model.addAttribute("producto", producto);
+        return "usuario/productohome";
+        /*if (productoOptional.isPresent()) {
             model.addAttribute("producto", productoOptional.get());
             return "usuario/productohome";
         } else {
             log.error("Producto con id {} no encontrado", id);
             return "redirect:/"; // O puedes mostrar una página de error personalizada
-        }
+        }*/
     }
-    /*public String productoHome(@PathVariable Integer id, Model model    ) {
-        log.info("Id producto enviado como parametro {}", id);
-        Producto producto = new Producto();
-        Optional<Producto> productoOptional = productoService.get(id);
-        producto=productoOptional.get();
-        model.addAttribute("producto", productoService.get(id).get());
-        return "usuario/productohome";
-    }*/
-
     @PostMapping("/cart")
     public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) {
         log.info("Agregando producto al carrito");
         DetalleOrden detalleOrden = new DetalleOrden();
         Producto producto = new Producto();
         double sumaTotal= 0;
+
         Optional<Producto> optionalProducto = productoService.get(id);
         log.info("Producto añadido: {}", optionalProducto.get());
         log.info("Cantidad de productos: {}", cantidad);
@@ -133,16 +135,20 @@ public class HomeController {
     }
 
     @GetMapping("/getCart")
-    public String getCart(Model model) {
+    public String getCart(Model model, HttpSession session) {
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
+
+        //sesion
+        model.addAttribute("sesion", session.getAttribute("idusuario"));
         return  "usuario/carrito";
     }
 
     @GetMapping("/order")
-    public String order(Model model) {
+    public String order(Model model, HttpSession session) {
 
-        Usuario usuario = usuarioService.findById(1).get();
+        Usuario usuario = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
+
         model.addAttribute("usuario", usuario);
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
@@ -151,13 +157,13 @@ public class HomeController {
 
     // Guardar la orden y sus detalles
     @GetMapping("/saveOrder")
-    public String saveOrder() {
+    public String saveOrder(HttpSession session) {
         Date fechaCreacion = new Date();
         orden.setFechaCreacion(fechaCreacion);
         orden.setNumero(ordenService.generarNumeroOrden());
 
         // Usuario
-        Usuario usuario=usuarioService.findById(1).get();
+        Usuario usuario=usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
 
         orden.setUsuario(usuario);
         ordenService.save(orden);
