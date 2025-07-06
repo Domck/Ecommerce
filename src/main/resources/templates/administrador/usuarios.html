@@ -12,18 +12,18 @@
 
 
   <!-- Bootstrap core CSS -->
-<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
-	rel="stylesheet">
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+        rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
-  <div th:include="administrador/template_admin.html::header"></div>
+<!-- Navigation -->
+<div th:include="administrador/template_admin.html::header"></div>
 
 <!-- Page Content -->
 <div class="container">
@@ -41,18 +41,18 @@
   <h2>Usuarios</h2>
   <table class="table">
     <thead>
-      <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Email</th>
-        <th scope="col">Dirección</th>
-      </tr>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
+      <th scope="col">Dirección</th>
+    </tr>
     </thead>
     <tbody>
-      <tr th:each="usuario:${usuarios}">
-        <td th:text="${usuario.nombre}"></td>
-        <td th:text="${usuario.email}"></td>
-        <td th:text="${usuario.direccion}"></td>
-      </tr>       
+    <tr th:each="usuario:${usuarios}">
+      <td th:text="${usuario.nombre}"></td>
+      <td th:text="${usuario.email}"></td>
+      <td th:text="${usuario.direccion}"></td>
+    </tr>
     </tbody>
   </table>
 
@@ -62,9 +62,9 @@
 <!-- Footer -->
 <div th:include="administrador/template_admin.html::footer"></div>
 
-	<!-- Bootstrap core JavaScript -->
-	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 

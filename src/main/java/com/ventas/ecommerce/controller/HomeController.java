@@ -64,13 +64,6 @@ public class HomeController {
         producto = productoOptional.get();
         model.addAttribute("producto", producto);
         return "usuario/productohome";
-        /*if (productoOptional.isPresent()) {
-            model.addAttribute("producto", productoOptional.get());
-            return "usuario/productohome";
-        } else {
-            log.error("Producto con id {} no encontrado", id);
-            return "redirect:/"; // O puedes mostrar una página de error personalizada
-        }*/
     }
     @PostMapping("/cart")
     public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) {
